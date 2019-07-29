@@ -43,8 +43,8 @@ l_canvas = Canvas(left, width=(w/2.25), height=(h * 0.75))
 l_canvas.place(x=w/50, y=w/16)
 l_canvas.configure(background="white")
 
-# l_button = Button(left, text="Deploy Code", width=(w/2.25), height=(h/4))
-
+l_button = Button(left, text="Deploy Code", width=20, height=10, highlightbackground='#3E4149')
+l_button.place(anchor=NW, x=w/50, y=h*0.75)
 
 right = ttk.Frame(mainframe, width=w/2, height=h, style="Right.TFrame")
 right.grid(column=3, row=0, columnspan=3, rowspan=3)
@@ -53,6 +53,8 @@ r_label = ttk.Label(right, text="Code",
 r_label.place(x=1+(w/50), y=1+(h/50))
 
 r_canvas = Canvas(right, width=(w/2.25), height=(h * 0.82))
+
+# Add font, and fix colors for everything
 r_canvas.create_text(15, 10, fill="darkblue",
                      font="Times 20 italic bold", text=contents, anchor=NW)
 r_canvas.place(x=1+(w/50), y=1+(w/16))
