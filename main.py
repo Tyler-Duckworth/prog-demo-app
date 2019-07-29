@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import font
+import os
 
 
 # Grid is three by six
@@ -12,6 +13,9 @@ from tkinter import font
 # |    |____|_____|     |
 # |    |    |     |     |
 # -----------------------
+
+with open(os.getcwd() + "/code/commands/drivedistance.py", "r") as content_file:
+    contents = content_file.read()
 root = Tk()
 root.title("Autonomous App")
 open_sans_bold = font.Font(family="Open Sans Semibold", size=36)
@@ -31,22 +35,26 @@ root.rowconfigure(0, weight=1)
 
 left = ttk.Frame(mainframe, width=w/2, height=h, style="Left.TFrame")
 left.grid(column=0, row=0, columnspan=3, rowspan=3)
-l_label = ttk.Label(left, text="Cards", style="Left.TLabel", font=open_sans_bold)
+l_label = ttk.Label(left, text="Cards",
+                    style="Left.TLabel", font=open_sans_bold)
 l_label.place(x=w/50, y=h/50)
 
 l_canvas = Canvas(left, width=(w/2.25), height=(h * 0.75))
 l_canvas.place(x=w/50, y=w/16)
 l_canvas.configure(background="white")
 
-l_button = Button(left, text="Deploy Code", width=(w/2.25), height)
+# l_button = Button(left, text="Deploy Code", width=(w/2.25), height=(h/4))
 
 
 right = ttk.Frame(mainframe, width=w/2, height=h, style="Right.TFrame")
 right.grid(column=3, row=0, columnspan=3, rowspan=3)
-r_label = ttk.Label(right, text="Code", style="Right.TLabel", font=open_sans_bold)
+r_label = ttk.Label(right, text="Code",
+                    style="Right.TLabel", font=open_sans_bold)
 r_label.place(x=1+(w/50), y=1+(h/50))
 
 r_canvas = Canvas(right, width=(w/2.25), height=(h * 0.82))
+r_canvas.create_text(15, 10, fill="darkblue",
+                     font="Times 20 italic bold", text=contents, anchor=NW)
 r_canvas.place(x=1+(w/50), y=1+(w/16))
 r_canvas.configure(background="white")
 
