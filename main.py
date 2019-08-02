@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import font
 import os
+from card import Card
 
 
 # Grid is three by six
@@ -13,6 +14,33 @@ import os
 # |    |____|_____|     |
 # |    |    |     |     |
 # -----------------------
+cards = []
+
+
+def deploy():
+    # os.system("python3 code/robot.py test")
+    f = open(os.getcwd() + "/code/commands/autonomous.py", "a")
+    for card in cards:
+        f.write(card.getCommand())
+    f.close()
+    print("DEPLOYED")
+
+
+def write_speed():
+    cards.append(Card(root, l_canvas, len(cards), "rotate"))
+
+
+def write_rotate():
+    cards.append(Card(root, l_canvas, len(cards), "rotate"))
+
+
+def write_forward():
+    cards.append(Card(root, l_canvas, len(cards), "forward"))
+
+
+def write_backward():
+    cards.append(Card(root, l_canvas, len(cards), "back"))
+
 
 with open(os.getcwd() + "/code/commands/drivedistance.py", "r") as content_file:
     contents = content_file.read()
@@ -43,8 +71,15 @@ l_canvas = Canvas(left, width=(w/2.25), height=(h * 0.75))
 l_canvas.place(x=w/50, y=w/16)
 l_canvas.configure(background="white")
 
-l_button = Button(left, text="Deploy Code", width=20, height=10, highlightbackground='#3E4149')
+l_button = Button(left, text="Deploy Code", width=20, height=0, highlightbackground='#3E4149', command=deploy, relief=FLAT)
 l_button.place(anchor=NW, x=w/50, y=h*0.75)
+
+l_button1 = Button(left, text="Go Forward", width=10, height=0, highlightbackground='#3E4149', command=write_forward, relief=FLAT)
+l_button1.place(anchor=NW, x=150, y=800)
+l_button2 = Button(left, text="Rotate", width=10, height=0, highlightbackground='#3E4149', command=write_rotate, relief=FLAT)
+l_button2.place(anchor=NW, x=50, y=800)
+l_button3 = Button(left, text="Go Backward", width=10, height=0, highlightbackground='#3E4149', command=write_backward, relief=FLAT)
+l_button3.place(anchor=NW, x=250, y=800)
 
 right = ttk.Frame(mainframe, width=w/2, height=h, style="Right.TFrame")
 right.grid(column=3, row=0, columnspan=3, rowspan=3)
